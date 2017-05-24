@@ -19,12 +19,14 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class CNFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<List<WowToken>>{
+        LoaderManager.LoaderCallbacks<WowToken>{
 
     private static final String WOW_TOKEN_URL =
             "https://data.wowtoken.info/snapshot.json";
 
     private static final int TOKEN_LOADER_ID = 1;
+
+    private static final int REGION_ID = 2;
 
     TextView region;
     TextView regionPrice;
@@ -58,29 +60,29 @@ public class CNFragment extends Fragment implements
     }
 
     @Override
-    public Loader<List<WowToken>> onCreateLoader(int id, Bundle args) {
+    public Loader<WowToken> onCreateLoader(int id, Bundle args) {
         Log.e("CN OnCreateLoader :", "new loader created");
-        return new WowTokenLoader(getActivity(), WOW_TOKEN_URL);
+        return new WowTokenLoader(getActivity(), WOW_TOKEN_URL, REGION_ID);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<WowToken>> loader, List<WowToken> tokens) {
-        if (tokens != null && !tokens.isEmpty()){
-            long lastUpdate = tokens.get(2).getLastUpdate();
+    public void onLoadFinished(Loader<WowToken> loader, WowToken token) {
+        if (token != null){
+            long lastUpdate = token.getLastUpdate();
             Date sinceEpoch = new Date(lastUpdate*1000);
             SimpleDateFormat formattedDate = new SimpleDateFormat("MM/dd/yy");
             SimpleDateFormat formattedTime = new SimpleDateFormat("h:mm a z");
 
-            region.setText(tokens.get(2).getRegion());
-            regionPrice.setText(tokens.get(2).getCurrentPrice());
-            priceHigh.setText(tokens.get(2).getPriceHigh());
-            priceLow.setText(tokens.get(2).getPriceLow());
+            region.setText(token.getRegion());
+            regionPrice.setText(token.getCurrentPrice());
+            priceHigh.setText(token.getPriceHigh());
+            priceLow.setText(token.getPriceLow());
             lastDate.setText(formattedDate.format(sinceEpoch));
             lastTime.setText(formattedTime.format(sinceEpoch));
         }
     }
 
     @Override
-    public void onLoaderReset(Loader<List<WowToken>> loader) {
+    public void onLoaderReset(Loader<WowToken> loader) {
     }
 }
