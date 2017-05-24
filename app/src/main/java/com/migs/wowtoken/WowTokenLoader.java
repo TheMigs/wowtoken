@@ -3,8 +3,6 @@ package com.migs.wowtoken;
 import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
 
-import java.util.List;
-
 /**
  * Created by Miguel on 5/22/2017.
  */
