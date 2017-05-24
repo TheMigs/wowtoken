@@ -23,7 +23,6 @@ public final class QueryUtils {
 
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
-
     private QueryUtils(){
     }
 
