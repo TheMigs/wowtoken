@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">WoW Token</string>
+
+    <string name="action_refresh">Refresh</string>
+
+    <string name="action_about">About</string>
+    <string name="provided">Data provided by:</string>
+    <string name="wowtoken"><a href="https://wowtoken.info/">wowtoken.info</a></string>
+
+    <string name="na">NA</string>
+    <string name="north_america">North America</string>
+    <string name="na_includes">Includes: United States, Oceanic, Latin America, Brazil</string>
+    <string name="eu">EU</string>
+    <string name="europe">Europe</string>
+    <string name="eu_includes">Includes: United Kingdom, Germany, France, Spain, Russia, Italy</string>
+    <string name="cn">CN</string>
+    <string name="china">China</string>
+    <string name="tw">TW</string>
+    <string name="taiwan">Taiwan</string>
+    <string name="kr">KR</string>
+    <string name="korea">Korea</string>
+
+    <string name="default_region">Region</string>
+    <string name="default_price">000,000g</string>
+    <string name="last_update">Last Updated:</string>
+    <string name="default_date">1/1/70</string>
+    <string name="default_time">00:00 GMT</string>
+
+</resources>
