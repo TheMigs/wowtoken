@@ -9,15 +9,18 @@ import java.util.List;
  * Created by Miguel on 5/22/2017.
  */
 
-public class WowTokenLoader extends AsyncTaskLoader<List<WowToken>> {
+public class WowTokenLoader extends AsyncTaskLoader<WowToken> {
 
     private static final String LOG_TAG = WowTokenLoader.class.getName();
 
     private String mUrl;
 
-    public WowTokenLoader(Context context, String url){
+    private int mRegion;
+
+    public WowTokenLoader(Context context, String url, int region){
         super(context);
         mUrl = url;
+        mRegion = region;
     }
 
     @Override
@@ -26,12 +29,10 @@ public class WowTokenLoader extends AsyncTaskLoader<List<WowToken>> {
     }
 
     @Override
-    public List<WowToken> loadInBackground() {
+    public WowToken loadInBackground() {
         if (mUrl == null)
             return null;
 
-        List<WowToken> tokens = QueryUtils.fetchWowTokenData(mUrl);
-
-        return tokens;
+        return QueryUtils.fetchWowTokenData(mUrl, mRegion);
     }
 }
