@@ -28,7 +28,7 @@ public final class QueryUtils {
     private QueryUtils(){
     }
 
-    public static List<WowToken> fetchWowTokenData(String requestUrl){
+    public static WowToken fetchWowTokenData(String requestUrl, int region){
         URL url = createUrl(requestUrl);
 
         String jsonResponse = null;
@@ -39,110 +39,140 @@ public final class QueryUtils {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-        List<WowToken> tokens = extractDataFromJson(jsonResponse);
+        WowToken token = extractDataFromJson(jsonResponse, region);
 
-        return tokens;
+        return token;
     }
 
-    private static List<WowToken> extractDataFromJson(String tokenJSON){
+    private static WowToken extractDataFromJson(String tokenJSON, int region){
         if (TextUtils.isEmpty(tokenJSON))
             return null;
 
-        List<WowToken> tokens = new ArrayList<>();
+        JSONObject baseJsonResponse = null;
+        JSONObject raw;
+        long lastUpdate;
+        JSONObject formatted;
+        String currentPrice;
+        String priceHigh;
+        String priceLow;
+        WowToken token = null;
 
         try {
-            JSONObject baseJsonResponse = new JSONObject(tokenJSON);
-
-            /* NA Token */
-            JSONObject northAmerica = baseJsonResponse.getJSONObject("NA");
-
-            //Get Date
-            JSONObject raw = northAmerica.getJSONObject("raw");
-            long lastUpdate = raw.getLong("updated");
-
-            //Get current, high, and low price
-            JSONObject formatted = northAmerica.getJSONObject("formatted");
-            String currentPrice = formatted.getString("buy");
-            String priceHigh = formatted.getString("24max");
-            String priceLow = formatted.getString("24min");
-
-            WowToken naToken = new WowToken("North America", currentPrice, priceHigh, priceLow, lastUpdate);
-
-            tokens.add(naToken);
-
-            /* EU Token */
-            JSONObject europe = baseJsonResponse.getJSONObject("EU");
-
-            //Get Date
-            raw = europe.getJSONObject("raw");
-            lastUpdate = raw.getLong("updated");
-
-            //Get current, high, and low price
-            formatted = europe.getJSONObject("formatted");
-            currentPrice = formatted.getString("buy");
-            priceHigh = formatted.getString("24max");
-            priceLow = formatted.getString("24min");
-
-            WowToken euToken = new WowToken("Europe", currentPrice, priceHigh, priceLow, lastUpdate);
-
-            tokens.add(euToken);
-
-            /* CN Token */
-            JSONObject china = baseJsonResponse.getJSONObject("CN");
-
-            //Get Date
-            raw = china.getJSONObject("raw");
-            lastUpdate = raw.getLong("updated");
-
-            //Get current, high, and low price
-            formatted = china.getJSONObject("formatted");
-            currentPrice = formatted.getString("buy");
-            priceHigh = formatted.getString("24max");
-            priceLow = formatted.getString("24min");
-
-            WowToken cnToken = new WowToken("China", currentPrice, priceHigh, priceLow, lastUpdate);
-
-            tokens.add(cnToken);
-
-            /* TW Token */
-            JSONObject taiwan = baseJsonResponse.getJSONObject("TW");
-
-            //Get Date
-            raw = taiwan.getJSONObject("raw");
-            lastUpdate = raw.getLong("updated");
-
-            //Get current, high, and low price
-            formatted = taiwan.getJSONObject("formatted");
-            currentPrice = formatted.getString("buy");
-            priceHigh = formatted.getString("24max");
-            priceLow = formatted.getString("24min");
-
-            WowToken twToken = new WowToken("Taiwan", currentPrice, priceHigh, priceLow, lastUpdate);
-
-            tokens.add(twToken);
-
-            /* KR Token */
-            JSONObject korea = baseJsonResponse.getJSONObject("KR");
-
-            //Get Date
-            raw = korea.getJSONObject("raw");
-            lastUpdate = raw.getLong("updated");
-
-            //Get current, high, and low price
-            formatted = korea.getJSONObject("formatted");
-            currentPrice = formatted.getString("buy");
-            priceHigh = formatted.getString("24max");
-            priceLow = formatted.getString("24min");
-
-            WowToken krToken = new WowToken("Korea", currentPrice, priceHigh, priceLow, lastUpdate);
-
-            tokens.add(krToken);
+            baseJsonResponse = new JSONObject(tokenJSON);
         }
         catch (JSONException e){
-            Log.e("QueryUtils", "Problem parsing the WoW token JSON results", e);
+            Log.e("QueryUtils: ", "Problem parsing the base JSON results", e);
         }
 
-        return tokens;
+        switch (region){
+            /* NA Token */
+            case 0:
+                try {
+                    JSONObject northAmerica = baseJsonResponse.getJSONObject("NA");
+
+                    //Get Date
+                    raw = northAmerica.getJSONObject("raw");
+                    lastUpdate = raw.getLong("updated");
+
+                    //Get current, high, and low price
+                    formatted = northAmerica.getJSONObject("formatted");
+                    currentPrice = formatted.getString("buy");
+                    priceHigh = formatted.getString("24max");
+                    priceLow = formatted.getString("24min");
+
+                    token = new WowToken("North America", currentPrice, priceHigh, priceLow, lastUpdate);
+                }
+                catch (JSONException e){
+                    Log.e("QueryUtils: ", "Problem parsing the NA JSON results", e);
+                }
+                return token;
+            /* EU Token */
+            case 1:
+                try {
+                    JSONObject europe = baseJsonResponse.getJSONObject("EU");
+
+                    //Get Date
+                    raw = europe.getJSONObject("raw");
+                    lastUpdate = raw.getLong("updated");
+
+                    //Get current, high, and low price
+                    formatted = europe.getJSONObject("formatted");
+                    currentPrice = formatted.getString("buy");
+                    priceHigh = formatted.getString("24max");
+                    priceLow = formatted.getString("24min");
+
+                    token = new WowToken("Europe", currentPrice, priceHigh, priceLow, lastUpdate);
+                }
+                catch (JSONException e){
+                    Log.e("QueryUtils: ", "Problem parsing the EU JSON results", e);
+                }
+                return token;
+            /* CN Token */
+            case 2:
+                try {
+                    JSONObject china = baseJsonResponse.getJSONObject("CN");
+
+                    //Get Date
+                    raw = china.getJSONObject("raw");
+                    lastUpdate = raw.getLong("updated");
+
+                    //Get current, high, and low price
+                    formatted = china.getJSONObject("formatted");
+                    currentPrice = formatted.getString("buy");
+                    priceHigh = formatted.getString("24max");
+                    priceLow = formatted.getString("24min");
+
+                    token = new WowToken("China", currentPrice, priceHigh, priceLow, lastUpdate);
+                }
+                catch (JSONException e){
+                    Log.e("QueryUtils: ", "Problem parsing the CN JSON results", e);
+                }
+                return token;
+            /* TW Token */
+            case 3:
+                try {
+                    JSONObject taiwan = baseJsonResponse.getJSONObject("TW");
+
+                    //Get Date
+                    raw = taiwan.getJSONObject("raw");
+                    lastUpdate = raw.getLong("updated");
+
+                    //Get current, high, and low price
+                    formatted = taiwan.getJSONObject("formatted");
+                    currentPrice = formatted.getString("buy");
+                    priceHigh = formatted.getString("24max");
+                    priceLow = formatted.getString("24min");
+
+                    token = new WowToken("Taiwan", currentPrice, priceHigh, priceLow, lastUpdate);
+                }
+                catch (JSONException e){
+                    Log.e("QueryUtils: ", "Problem parsing the TW JSON results", e);
+                }
+                return token;
+            /* KR Token */
+            case 4:
+                try {
+                    JSONObject korea = baseJsonResponse.getJSONObject("KR");
+
+                    //Get Date
+                    raw = korea.getJSONObject("raw");
+                    lastUpdate = raw.getLong("updated");
+
+                    //Get current, high, and low price
+                    formatted = korea.getJSONObject("formatted");
+                    currentPrice = formatted.getString("buy");
+                    priceHigh = formatted.getString("24max");
+                    priceLow = formatted.getString("24min");
+
+                    token = new WowToken("Korea", currentPrice, priceHigh, priceLow, lastUpdate);
+                }
+                catch (JSONException e){
+                    Log.e("QueryUtils: ", "Problem parsing the TW JSON results", e);
+                }
+                return token;
+            default:
+                return null;
+        }
     }
 
     private static URL createUrl(String stringUrl){
