@@ -8,12 +8,4 @@
         android:id="@+id/action_about"
         android:title="@string/action_about"
         app:showAsAction="never" />
-
-    <item
-        android:id="@+id/menu_refresh"
-        android:title="@string/action_refresh"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_action_refresh"
-        />
-
 </menu>
