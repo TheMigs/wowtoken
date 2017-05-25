@@ -1,4 +1,4 @@
-package com.migs.wowtoken;
+package com.migs.wowtokenprice;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

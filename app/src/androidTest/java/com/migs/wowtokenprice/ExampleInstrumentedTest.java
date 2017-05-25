@@ -1,4 +1,4 @@
-package com.migs.wowtoken;
+package com.migs.wowtokenprice;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

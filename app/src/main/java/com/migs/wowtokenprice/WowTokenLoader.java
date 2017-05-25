@@ -1,4 +1,4 @@
-package com.migs.wowtoken;
+package com.migs.wowtokenprice;
 
 import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;

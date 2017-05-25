@@ -1,4 +1,4 @@
-package com.migs.wowtoken;
+package com.migs.wowtokenprice;
 
 
 import android.support.v4.app.LoaderManager;
@@ -17,7 +17,7 @@ import java.util.Date;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NAFragment extends Fragment implements
+public class CNFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<WowToken>{
 
     private static final String WOW_TOKEN_URL =
@@ -25,7 +25,7 @@ public class NAFragment extends Fragment implements
 
     private static final int TOKEN_LOADER_ID = 1;
 
-    private static final int REGION_ID = 0;
+    private static final int REGION_ID = 2;
 
     TextView region;
     TextView regionPrice;
@@ -34,7 +34,7 @@ public class NAFragment extends Fragment implements
     TextView lastDate;
     TextView lastTime;
 
-    public NAFragment() {
+    public CNFragment() {
         // Required empty public constructor
     }
 
@@ -60,7 +60,7 @@ public class NAFragment extends Fragment implements
 
     @Override
     public Loader<WowToken> onCreateLoader(int id, Bundle args) {
-        Log.e("NA OnCreateLoader :", "new loader created");
+        Log.e("CN OnCreateLoader :", "new loader created");
         return new WowTokenLoader(getActivity(), WOW_TOKEN_URL, REGION_ID);
     }
 
