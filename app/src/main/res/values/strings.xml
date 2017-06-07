@@ -20,8 +20,8 @@
     <string name="kr">KR</string>
     <string name="korea">Korea</string>
 
-    <string name="default_region">Region</string>
-    <string name="default_price">000,000g</string>
+    <string name="default_region">Azeroth</string>
+    <string name="default_price">9,001g</string>
     <string name="last_update">Last Updated:</string>
     <string name="default_date">1/1/70</string>
     <string name="default_time">00:00 GMT</string>
