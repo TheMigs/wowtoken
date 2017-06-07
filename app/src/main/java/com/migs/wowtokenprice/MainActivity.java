@@ -14,15 +14,20 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class MainActivity extends AppCompatActivity {
 
     private AdView mAdView;
+    private String mAdId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAdId = getString(R.string.test_banner_id);
+        MobileAds.initialize(this, mAdId);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
