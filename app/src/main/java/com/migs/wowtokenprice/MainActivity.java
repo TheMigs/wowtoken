@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAdId = getString(R.string.test_banner_id);
+        mAdId = getString(R.string.app_id);
         MobileAds.initialize(this, mAdId);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
