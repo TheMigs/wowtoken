@@ -28,6 +28,7 @@
 
     <!-- AdMob ad unit IDs -->
     <string name="test_banner_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="app_id">ca-app-pub-1956965650785931~2841666400</string>
     <string name="banner_id">ca-app-pub-1956965650785931/7271866000</string>
 
 </resources>
