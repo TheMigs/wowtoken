@@ -52,7 +52,6 @@ public class CNFragment extends Fragment implements
         lastTime = (TextView) rootView.findViewById(R.id.last_time);
 
         LoaderManager loaderManager = getLoaderManager();
-
         loaderManager.initLoader(TOKEN_LOADER_ID, null, this);
 
         return rootView;

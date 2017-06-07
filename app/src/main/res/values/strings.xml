@@ -20,10 +20,15 @@
     <string name="kr">KR</string>
     <string name="korea">Korea</string>
 
-    <string name="default_region">Region</string>
-    <string name="default_price">000,000g</string>
+    <string name="default_region">Azeroth</string>
+    <string name="default_price">9,001g</string>
     <string name="last_update">Last Updated:</string>
     <string name="default_date">1/1/70</string>
     <string name="default_time">00:00 GMT</string>
+
+    <!-- AdMob ad unit IDs -->
+    <string name="test_banner_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="app_id">ca-app-pub-1956965650785931~2841666400</string>
+    <string name="banner_id">ca-app-pub-1956965650785931/7271866000</string>
 
 </resources>
